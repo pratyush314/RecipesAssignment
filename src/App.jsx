@@ -11,7 +11,7 @@ const App = () => {
   const [searchText, setSearchText] = useState("");
 
   const handleClick = () => {
-    if (!searchText) {
+    if (!searchText.trim()) {
       setError("Please Enter Something !");
       return;
     }
@@ -26,7 +26,7 @@ const App = () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(URL + searchText);
+      const res = await fetch(URL + searchText.trim());
       if (!res.ok) throw new Error("Sorry,no available recipes to show !");
       const data = await res.json();
       if (!data.meals) throw new Error("Sorry,no available recipes to show !");
